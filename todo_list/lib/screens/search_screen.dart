@@ -7,7 +7,8 @@ class SearchTodoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('TODO List'),
+        backgroundColor: Colors.amber[100],
+        title: const Text('Search'),
       ),
       body: const Center(
         child: Text('Search todo!'),

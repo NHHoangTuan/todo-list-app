@@ -3,6 +3,7 @@ import 'package:todo_list/screens/home_screen.dart';
 import 'package:todo_list/screens/today_todos_screen.dart';
 import 'package:todo_list/screens/upcoming_todos_screen.dart';
 import 'package:todo_list/screens/search_screen.dart';
+import 'package:todo_list/screens/all_todos_screen.dart';
 
 class NavigationMenu extends StatefulWidget {
   const NavigationMenu({Key? key}) : super(key: key);
@@ -17,6 +18,7 @@ class _NavigationMenuState extends State<NavigationMenu> {
   // Danh sách các màn hình tương ứng với mỗi tab
   final List<Widget> _screens = [
     const HomeScreen(),
+    const AllTodoScreen(),
     const TodayTodoScreen(),
     const UpcomingTodoScreen(),
     const SearchTodoScreen(),
@@ -46,6 +48,10 @@ class _NavigationMenuState extends State<NavigationMenu> {
             NavigationDestination(
               icon: Icon(Icons.home),
               label: 'Home',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.list),
+              label: 'All',
             ),
             NavigationDestination(
               icon: Icon(Icons.today),
