@@ -4,7 +4,7 @@ class AppTheme {
   static ThemeData get lightTheme {
     return ThemeData(
       colorScheme: ColorScheme.light(
-        primary: Colors.amber[300]!,
+        primary: Colors.amber[600]!,
         error: Colors.red,
       ),
       primarySwatch: Colors.amber,
@@ -25,12 +25,12 @@ class AppTheme {
         headerBackgroundColor: Colors.amber.shade200,
         headerForegroundColor: Colors.black,
         dayForegroundColor: MaterialStateProperty.all(Colors.black),
-        cancelButtonStyle: ButtonStyle(
-          foregroundColor: WidgetStatePropertyAll(Colors.red.shade600),
-        ),
-        confirmButtonStyle: ButtonStyle(
-          foregroundColor: WidgetStatePropertyAll(Colors.green.shade600),
-        ),
+        // cancelButtonStyle: ButtonStyle(
+        //   foregroundColor: WidgetStatePropertyAll(Colors.red.shade600),
+        // ),
+        // confirmButtonStyle: ButtonStyle(
+        //   foregroundColor: WidgetStatePropertyAll(Colors.green.shade600),
+        // ),
         // dayOverlayColor: WidgetStatePropertyAll(Colors.amber.shade200),
         dayStyle: const TextStyle(
           color: Colors.black,
@@ -50,13 +50,17 @@ class AppTheme {
           borderRadius: BorderRadius.circular(16.0),
           side: BorderSide(color: Colors.grey),
         ),
-        cancelButtonStyle: ButtonStyle(
-          foregroundColor: WidgetStatePropertyAll(Colors.red.shade600),
-        ),
-        confirmButtonStyle: ButtonStyle(
-          foregroundColor: WidgetStatePropertyAll(Colors.green.shade600),
-        ),
+        // cancelButtonStyle: ButtonStyle(
+        //   foregroundColor: WidgetStatePropertyAll(Colors.red.shade600),
+        // ),
+        // confirmButtonStyle: ButtonStyle(
+        //   foregroundColor: WidgetStatePropertyAll(Colors.green.shade600),
+        // ),
         //dayPeriodColor: Colors.blue[400],
+      ),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: Colors.amber[200],
+        foregroundColor: Colors.black,
       ),
     );
   }
