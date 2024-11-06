@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:todo_list/screens/home_screen.dart';
 import 'package:todo_list/screens/today_todos_screen.dart';
 import 'package:todo_list/screens/upcoming_todos_screen.dart';
 import 'package:todo_list/screens/search_screen.dart';
@@ -17,7 +16,6 @@ class _NavigationMenuState extends State<NavigationMenu> {
 
   // Danh sách các màn hình tương ứng với mỗi tab
   final List<Widget> _screens = [
-    const HomeScreen(),
     const AllTodoScreen(),
     const TodayTodoScreen(),
     const UpcomingTodoScreen(),
@@ -45,10 +43,6 @@ class _NavigationMenuState extends State<NavigationMenu> {
           selectedIndex: _selectedIndex,
           onDestinationSelected: _onDestinationSelected,
           destinations: const [
-            NavigationDestination(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
             NavigationDestination(
               icon: Icon(Icons.list),
               label: 'All',

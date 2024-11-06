@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../models/todo_model.dart';
 import '../providers/todo_provider.dart';
+import 'package:uuid/uuid.dart';
 
 class AddTodoScreen extends StatefulWidget {
   const AddTodoScreen({Key? key}) : super(key: key);
@@ -16,7 +17,9 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
   final _descriptionController = TextEditingController();
   final TextEditingController _dateController = TextEditingController();
   final TextEditingController _timeController = TextEditingController();
-  DateTime? _selectedDate;
+
+  DateTime? _pickedDate;
+  TimeOfDay? _pickedTime;
 
   final ScrollController _descriptionScrollController = ScrollController();
   final ValueNotifier<bool> _isTitleNotEmpty = ValueNotifier(false);
@@ -30,14 +33,15 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
   }
 
   void _submitData() {
-    if (_titleController.text.isEmpty || _selectedDate == null) {
+    if (_titleController.text.isEmpty) {
       return;
     }
-
     final newTodo = Todo(
+      id: const Uuid().v4(),
       title: _titleController.text,
       description: _descriptionController.text,
-      deadline: _selectedDate!,
+      deadline: _updateDeadline(),
+      createdAt: DateTime.now(),
     );
 
     Provider.of<TodoProvider>(context, listen: false).add(newTodo);
@@ -48,11 +52,12 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
     DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
+      firstDate: DateTime.now(),
       lastDate: DateTime(2101),
     );
     if (pickedDate != null) {
       setState(() {
+        _pickedDate = pickedDate;
         _dateController.text = DateFormat('yyyy-MM-dd').format(pickedDate);
       });
     }
@@ -65,9 +70,31 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
     );
     if (pickedTime != null) {
       setState(() {
+        _pickedTime = pickedTime;
         _timeController.text = pickedTime.format(context);
       });
     }
+  }
+
+  DateTime? _updateDeadline() {
+    if (_pickedDate == null && _pickedTime == null) {
+      return null;
+    }
+    DateTime finalDate = _pickedDate ??
+        DateTime.now(); // Dùng ngày đã chọn hoặc mặc định là hôm nay
+    int hour = _pickedTime?.hour ?? 23; // Lấy giờ đã chọn hoặc mặc định là 0
+    int minute =
+        _pickedTime?.minute ?? 59; // Lấy phút đã chọn hoặc mặc định là 0
+
+    final DateTime deadline = DateTime(
+      finalDate.year,
+      finalDate.month,
+      finalDate.day,
+      hour,
+      minute,
+    );
+
+    return deadline;
   }
 
   @override
